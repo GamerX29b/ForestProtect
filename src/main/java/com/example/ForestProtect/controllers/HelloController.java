@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HelloController {
-    @RequestMapping(value = "/hello.html")
+    @RequestMapping(value = "/",  produces={"text/html; charset=UTF-8"})
     public ModelAndView hello () {
         ModelAndView mv = new ModelAndView("hello");
         String baba = "baba";
