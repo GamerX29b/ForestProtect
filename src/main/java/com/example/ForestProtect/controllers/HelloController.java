@@ -9,7 +9,12 @@ public class HelloController {
     @RequestMapping(value = "/",  produces={"text/html; charset=UTF-8"})
     public ModelAndView hello () {
         ModelAndView mv = new ModelAndView("hello");
-        String baba = "baba";
+        return mv;
+    }
+    @RequestMapping(value = "/download.html")
+    public ModelAndView download(){
+        ModelAndView mv = new ModelAndView("download");
+
         return mv;
     }
 }
