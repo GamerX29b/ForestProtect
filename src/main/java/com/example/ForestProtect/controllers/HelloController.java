@@ -15,11 +15,18 @@ public class HelloController {
     private static final Logger LOGGER = LoggerFactory.getLogger(HelloController.class);
 
     @RequestMapping(value = "/",  produces={"text/html; charset=UTF-8"})
-    private ModelAndView hello () {
+    private ModelAndView hello () throws InterruptedException {
         ModelAndView mv = new ModelAndView("hello");
-        LOGGER.info("My default Charset " + Charset.defaultCharset());
+
         return mv;
     }
+    @RequestMapping(value = "/view.html",  produces={"text/html; charset=UTF-8"})
+    private ModelAndView view () throws InterruptedException {
+        ModelAndView mv = new ModelAndView("view");
+
+        return mv;
+    }
+
     @RequestMapping(value = "/download.html")
     private ModelAndView download(){
         ModelAndView mv = new ModelAndView("download");
