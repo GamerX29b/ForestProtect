@@ -91,7 +91,6 @@ public class uploadController {
                             System.out.println(latitude + " " + longitude);
                             }
                         }
-
                 DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 Calendar calendar = new GregorianCalendar();
                 calendar.setTime(formatter.parse(date));
@@ -100,11 +99,11 @@ public class uploadController {
                 Photos photos = new Photos();
                 photos.setId_user(user_id);
                 photos.setName(name);
-                String coordinates = xcoord + " " + ycoord;
+                String coordinates = latitude + " " + longitude;
                 photos.setCoordinates(coordinates);
                 photos.setDate(calendar.getTime());
 
-               // photosRepository.save(photos);
+                photosRepository.save(photos);
 
 
                 subdata = "Вы удачно загрузили фото, оно получило имя " + name + " ";

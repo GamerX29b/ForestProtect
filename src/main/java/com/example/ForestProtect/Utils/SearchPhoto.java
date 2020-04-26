@@ -8,8 +8,7 @@ import org.springframework.data.domain.PageRequest;
 
 
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.PagingAndSortingRepository;
+
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
@@ -25,7 +24,7 @@ public class SearchPhoto {
 
     public List<Photos> getPhotoListStarted (){
 
-        Pageable pageable = PageRequest.of(1,9);
+        Pageable pageable = PageRequest.of(1,4);
         Page<Photos> page = photosRepository.findAll(pageable);
         List<Photos> list = page.get().collect(Collectors.toList());
 
