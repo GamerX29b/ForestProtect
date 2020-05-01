@@ -98,6 +98,7 @@ public class uploadController {
                 System.out.println(date);
                 Photos photos = new Photos();
                 photos.setId_user(user_id);
+                photos.setVerification(false);
                 photos.setName(name);
                 String coordinates = latitude + " " + longitude;
                 photos.setCoordinates(coordinates);

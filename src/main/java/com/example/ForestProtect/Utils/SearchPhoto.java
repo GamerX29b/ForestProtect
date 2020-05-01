@@ -23,11 +23,20 @@ public class SearchPhoto {
     PhotosRepository photosRepository;
 
     public List<Photos> getPhotoListStarted (){
-
-        Pageable pageable = PageRequest.of(1,4);
-        Page<Photos> page = photosRepository.findAll(pageable);
-        List<Photos> list = page.get().collect(Collectors.toList());
-
+        List<Photos> list =  photosRepository.get4Photo();
         return list;
+    }
+    public void setNotVerify  (Photos notVerify){
+        photosRepository.delete(notVerify);
+    }
+
+    public void setVerify  (Photos notVerify){
+        notVerify.setVerification(true);
+        photosRepository.save(notVerify);
+    }
+
+    public Photos getPhotoForVerification (){
+        Photos photos =  photosRepository.getNotVerifyPhoto();
+        return photos;
     }
  }

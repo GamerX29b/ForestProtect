@@ -1,11 +1,14 @@
 package com.example.ForestProtect.controllers;
 
 import com.example.ForestProtect.Base.Photos;
+import com.example.ForestProtect.Base.PhotosRepository;
 import com.example.ForestProtect.Utils.SearchPhoto;
 import com.sun.javafx.util.Logging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import org.slf4j.Logger;
@@ -13,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class HelloController {
@@ -23,6 +27,9 @@ public class HelloController {
     public HelloController(SearchPhoto searchPhoto){
         this.searchPhoto = searchPhoto;
     }
+
+    @Autowired
+    PhotosRepository photosRepository;
 
     @RequestMapping(value = "/",  produces={"text/html; charset=UTF-8"})
     private ModelAndView hello () throws InterruptedException {
@@ -41,12 +48,6 @@ public class HelloController {
     @RequestMapping(value = "/download.html")
     private ModelAndView download(){
         ModelAndView mv = new ModelAndView("download");
-
-        return mv;
-    }
-    @RequestMapping(value = "/ImageVerification.html")
-    private ModelAndView verification(){
-        ModelAndView mv = new ModelAndView("ImageVerification");
 
         return mv;
     }
