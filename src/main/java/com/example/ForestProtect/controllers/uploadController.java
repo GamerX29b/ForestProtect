@@ -36,8 +36,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.logging.Logger;
-import java.util.stream.Stream;
+
 
 import static java.lang.Double.valueOf;
 
@@ -48,10 +47,6 @@ public class uploadController {
 
     @Autowired
     PhotosRepository photosRepository;
-
-
-
-
 
     private long user_id = 100;
     @RequestMapping(value="/upload", method= RequestMethod.POST)

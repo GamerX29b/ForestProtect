@@ -1,6 +1,7 @@
 package com.example.ForestProtect.controllers;
 
 import com.example.ForestProtect.Base.Documents;
+import com.example.ForestProtect.Base.DocumentsRepository;
 import com.example.ForestProtect.Base.Photos;
 import com.example.ForestProtect.Base.PhotosRepository;
 import com.example.ForestProtect.Utils.SearchPhoto;
@@ -25,6 +26,9 @@ public class VerificationController {
     @Autowired
     PhotosRepository photosRepository;
 
+    @Autowired
+    DocumentsRepository documentsRepository;
+
 
     @RequestMapping(value = "/ImageVerification.html", method = RequestMethod.GET)
     private ModelAndView verification(@RequestParam(required = false) String iDphotos,
@@ -47,9 +51,12 @@ public class VerificationController {
                     documents.setId_photo(photosBack.getId());
                     documents.setId_user(photosBack.getId_user());
                     documents.setViolation(violation);
+
+                   // documentsRepository.save(documents);
+
                 }
             }else {
-                searchPhoto.setNotVerify(photosBack);
+               // searchPhoto.setNotVerify(photosBack);
             }
         }
 
