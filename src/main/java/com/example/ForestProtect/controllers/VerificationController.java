@@ -37,8 +37,6 @@ public class VerificationController {
                                       @RequestParam(required = false) String content){
         ModelAndView mv = new ModelAndView("ImageVerification");
 
-
-
         if (iDphotos != null){
             Optional<Photos> photos = photosRepository.findById(Long.valueOf(iDphotos));
             Photos photosBack = photos.get();
@@ -52,7 +50,7 @@ public class VerificationController {
                     documents.setId_user(photosBack.getId_user());
                     documents.setViolation(violation);
 
-                   // documentsRepository.save(documents);
+                   // documentsRepository.save(documents); // TODO раскоментировать перед выпуском
 
                 }
             }else {
