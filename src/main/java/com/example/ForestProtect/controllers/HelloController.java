@@ -5,6 +5,7 @@ import com.example.ForestProtect.Base.PhotosRepository;
 import com.example.ForestProtect.Utils.SearchPhoto;
 import com.sun.javafx.util.Logging;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +18,10 @@ import java.util.List;
 
 @Controller
 public class HelloController {
+
+    @Value("${compile.version}")
+    private String thisVersion;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(HelloController.class);
     private final SearchPhoto searchPhoto;
 
@@ -32,6 +37,7 @@ public class HelloController {
     private ModelAndView hello () throws InterruptedException {
         ModelAndView mv = new ModelAndView("hello");
 
+        mv.addObject("Version", thisVersion);
         return mv;
     }
     @RequestMapping(value = "/view.html",  produces={"text/html; charset=UTF-8"})

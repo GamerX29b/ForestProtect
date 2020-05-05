@@ -17,11 +17,15 @@ public class SearchPhoto {
     @Autowired
     PhotosRepository photosRepository;
 
+    @Autowired
+    FileManipulation fileManipulation;
+
     public List<Photos> getPhotoListStarted (){
         List<Photos> list =  photosRepository.get4Photo();
         return list;
     }
     public void setNotVerify  (Photos notVerify){
+        fileManipulation.deletePhoto(notVerify.getName());
         photosRepository.delete(notVerify);
     }
 

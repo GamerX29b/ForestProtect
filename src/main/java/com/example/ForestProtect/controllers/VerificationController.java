@@ -50,11 +50,11 @@ public class VerificationController {
                     documents.setId_user(photosBack.getId_user());
                     documents.setViolation(violation);
 
-                   // documentsRepository.save(documents); // TODO раскоментировать перед выпуском
+                   documentsRepository.save(documents); // TODO раскоментировать перед выпуском
 
                 }
             }else {
-               // searchPhoto.setNotVerify(photosBack);
+               searchPhoto.setNotVerify(photosBack);
             }
         }
 
