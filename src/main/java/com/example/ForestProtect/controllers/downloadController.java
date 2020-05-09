@@ -1,5 +1,6 @@
 package com.example.ForestProtect.controllers;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +18,14 @@ import java.nio.file.Paths;
 @Controller
 public class downloadController {
 
+    @Value("${file.folder}")
+    private String fileAdress;
+
     @RequestMapping(value = "/photo", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<ByteArrayResource> photos (@RequestParam("name") String name) throws InterruptedException, IOException {
 
 
-            Path patc = Paths.get("photo/" + name + ".jpg");
+            Path patc = Paths.get(fileAdress + name + ".jpg");
             ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(patc));
             return ResponseEntity.ok()
                     .contentType(MediaType.IMAGE_JPEG)

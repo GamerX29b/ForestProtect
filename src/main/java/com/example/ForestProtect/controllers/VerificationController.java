@@ -37,7 +37,7 @@ public class VerificationController {
                                       @RequestParam(required = false) String content){
         ModelAndView mv = new ModelAndView("ImageVerification");
 
-        if (iDphotos != null){
+        if (iDphotos != null && !(iDphotos.trim().length() == 0)){
             Optional<Photos> photos = photosRepository.findById(Long.valueOf(iDphotos));
             Photos photosBack = photos.get();
             if (yes){

@@ -9,6 +9,7 @@ import com.example.ForestProtect.Base.PhotosRepository;
 import com.example.ForestProtect.controllers.HelloController;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,7 +17,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,8 +34,10 @@ public class FileManipulation {
     @Autowired
     PhotosRepository photosRepository;
 
+    @Value("${file.folder}")
+    private String fileAdress;
 
-    private String fileAdress = "photo\\";
+
     private long user_id = 100;
 
     public String savePhoto(String xcoord, String ycoord, MultipartFile file, String date){
@@ -73,7 +75,7 @@ public class FileManipulation {
                 Calendar calendar = new GregorianCalendar();
                 calendar.setTime(formatter.parse(date));
 
-                System.out.println(date);
+
                 Photos photos = new Photos();
                 photos.setId_user(user_id);
                 photos.setVerification(false);
