@@ -5,6 +5,8 @@
 <link type="text/css" href="../css/generalSyleClass.css" rel="stylesheet" />
 <%--@elvariable id="photo" type="List<PagePhotoResult>"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 
 <html>
 <head>
@@ -19,15 +21,19 @@
             border: 1px solid white; /* Рамка вокруг ячеек */
         }
     </style>
-    <title>Title</title>
 </head>
-<div class="textStandart">
-    <a  href="/download.html">Загрузка отчётов</a>
-    <a  href="/view.html">Просмотр фото</a>
-    <a  href="/ImageVerification.html">Верификация фото</a>
-    <a  href="/search.html">Поиск</a>
-</div>
+
 <body class="background">
+<div class="containerNav">
+    <ul class="ulNav">
+        <li class="one"><a class="aNav" href="/download.html">Загрузка отчётов</a></li>
+        <li class="two"><a class="aNav" href="/view.html">Просмотр фото</a></li>
+        <li class="three"><a class="aNav" href="/ImageVerification.html">Верификация фото</a></li>
+        <li class="four"><a class="aNav" href="/search.html">Поиск</a></li>
+        <hr class="hrNav"/><div class="divNavPanel"></div>
+    </ul>
+</div>
+
     <div class="textStandart">
         <form>
             <div>Дата от <input type="date" name="StartDate" style="width: 120px">Дата до <input type="date" name="EndDate" style="width: 120px"></div>
