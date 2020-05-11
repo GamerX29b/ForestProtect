@@ -54,7 +54,7 @@ public class FileManipulation {
                 BufferedImage image = ImageIO.read(new ByteArrayInputStream(bytes));
                 //место для удара головой в FTP хранилище
                 File output = new File(fileAdress+ name + ".jpg");
-                ImageIO.write(image, "jpg", output);
+
 
                 Metadata metadata = ImageMetadataReader.readMetadata(new ByteArrayInputStream(bytes));
                 if(!metadata.hasErrors()){
@@ -66,9 +66,10 @@ public class FileManipulation {
                         for (GpsDirectory gpsDirectory : collection) {
                             geoLocation = gpsDirectory.getGeoLocation();
                         }
-                        latitude = geoLocation.getLatitude();
-                        longitude = geoLocation.getLongitude();
-
+                        if(geoLocation != null) {
+                            latitude = geoLocation.getLatitude();
+                            longitude = geoLocation.getLongitude();
+                        }
                     }
                 }
                 DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -85,7 +86,7 @@ public class FileManipulation {
                 photos.setDate(calendar.getTime());
 
                 photosRepository.save(photos);
-
+                ImageIO.write(image, "jpg", output);
 
                 subdata = "Вы удачно загрузили фото, оно получило имя " + name + " ";
             } catch (IllegalArgumentException e) {

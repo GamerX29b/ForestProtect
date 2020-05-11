@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <link type="text/css" href="../css/generalSyleClass.css" rel="stylesheet" />
 <%--@elvariable id="photo" type="List<PagePhotoResult>"--%>
+<%--@elvariable id="searchPaket" type="SearchPaket>"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
@@ -35,11 +36,13 @@
 </div>
 
     <div class="textStandart">
-        <form>
-            <div>Дата от <input type="date" name="StartDate" style="width: 120px">Дата до <input type="date" name="EndDate" style="width: 120px"></div>
-            <div>Координаты <input name="Coordinates"></div>
-            <div>Наличие нарушений <input type="checkbox" name="violation"></div>
-            <button type="button" class="button" onclick="toController()">Найти</button>
+        <form action = "/search.html" method = "GET" enctype = "multipart/form-data" id="search">
+            <div>ID фотографии <input name="id" value="${searchPaket.id}"></div>
+            <div>Имя фотографии <input name="name" value="${searchPaket.name}"></div>
+            <div>Дата от <input type="date" name="startDate" value="${searchPaket.startDate}" style="width: 130px">Дата до <input type="date" value="${searchPaket.endDate}" name="endDate" style="width: 130px"></div>
+            <div>Координаты <input name="coordinates" value="${searchPaket.coordinates}"></div>
+            <div>Наличие нарушений <input type="checkbox" name="violation" value="${searchPaket.violation}"></div>
+            <button type="submit" class="button" value="">Найти</button>
         </form>
     </div>
     <div style="text-align: -webkit-center">
@@ -59,11 +62,12 @@
                     </c:if>
                 </td>
                 <td>${exampe.coordinates}</td>
-                <td>${exampe.violation}</td>
+                <td><c:if test="${exampe.violation}">Да</c:if><c:if test="${!exampe.violation}">Нет</c:if></td>
                 <td>${exampe.document}</td>
             </tr>
         </c:forEach>
         </table>
+        <div class="textStandart"><c:if test="${searchPaket.page > 0}"><a><-</a></c:if><a>${searchPaket.page + 1}</a><a>-></a></div>
     </div>
 </body>
 </html>

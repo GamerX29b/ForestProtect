@@ -53,7 +53,7 @@ public class SearchPhoto {
         return photos;
     }
 
-    public List<PagePhotoResult> getSearchResult (String id, boolean violation, String startDateString, String endDateString, String coordinates, int page)
+    public List<PagePhotoResult> getSearchResult (String id, String name, boolean violation, String startDateString, String endDateString, String coordinates, int page)
     {
         Pageable pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "date"));
 
@@ -65,6 +65,16 @@ public class SearchPhoto {
             filterPhotos.setId(Long.valueOf(id));
             ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("File")
                     .withIgnorePaths("name")
+                    .withIgnorePaths("id_user")
+                    .withIgnorePaths("date")
+                    .withIgnorePaths("coordinates")
+                    .withIgnorePaths("verification");
+            Example<Photos> example = Example.of(filterPhotos, matcher);
+            pages = photosRepository.findAll(example, pageable);
+        } else if(name != null && !(name.trim().length() == 0)) {  //Если у нас указан ID мы игнорируем всё кроме него
+            filterPhotos.setName(name);
+            ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("File")
+                    .withIgnorePaths("id")
                     .withIgnorePaths("id_user")
                     .withIgnorePaths("date")
                     .withIgnorePaths("coordinates")
@@ -90,15 +100,8 @@ public class SearchPhoto {
             pages = photosRepository.findAllDateAfter(parseDate(endDateString), pageable);
         } else if (coordinates != null &&
                 !(coordinates.trim().length() == 0)){ //если указаны координаты
-            ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("File")
-                    .withIgnorePaths("id")
-                    .withIgnorePaths("name")
-                    .withIgnorePaths("id_user")
-                    .withIgnorePaths("date")
-                    .withIgnorePaths("verification");
-            filterPhotos.setCoordinates(coordinates);
-            Example<Photos> example = Example.of(filterPhotos, matcher);
-            pages = photosRepository.findAll(example, pageable);
+
+            pages = photosRepository.findByCoorinat(coordinates, pageable);
         } else {
 
             ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("id")

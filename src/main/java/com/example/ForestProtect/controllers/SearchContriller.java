@@ -3,6 +3,7 @@ package com.example.ForestProtect.controllers;
 
 import com.example.ForestProtect.Classes.PagePhotoResult;
 
+import com.example.ForestProtect.Classes.SearchPaket;
 import com.example.ForestProtect.Utils.SearchPhoto;
 import org.hibernate.criterion.MatchMode;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,7 @@ public class SearchContriller {
     public @ResponseBody
     ModelAndView handleFileUpload(
             @RequestParam(required = false ) String id,
+            @RequestParam(required = false ) String name,
             @RequestParam(required = false ) boolean violation,
             @RequestParam(required = false ) String startDate,
             @RequestParam(required = false ) String endDate,
@@ -37,10 +39,20 @@ public class SearchContriller {
             @RequestParam(required = false, defaultValue = "0") int page){
 
 
-        List<PagePhotoResult> pagePhotoResultList = searchPhoto.getSearchResult(id, violation, startDate, endDate, coordinates,  page);
+        List<PagePhotoResult> pagePhotoResultList = searchPhoto.getSearchResult(id, name, violation, startDate, endDate, coordinates,  page);
+        SearchPaket searchPaket = new SearchPaket();
+        searchPaket.setId(id);
+        searchPaket.setName(name);
+        searchPaket.setViolation(violation);
+        searchPaket.setStartDate(startDate);
+        searchPaket.setEndDate(endDate);
+        searchPaket.setPage(page);
+
+
 
         ModelAndView mv = new ModelAndView("search");
         mv.addObject("photo", pagePhotoResultList);
+        mv.addObject("searchPaket", searchPaket);
         return mv;
     }
 }

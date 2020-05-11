@@ -19,11 +19,14 @@ public interface PhotosRepository extends JpaRepository<Photos, Long>{
 
     Page<Photos> findAllByDateBetween(Date dateStart, Date dateEnd, Pageable pageable);
 
-    @Query(value = "select a from public.photos a where a.Date <= :Date", nativeQuery = true)
-    Page<Photos> findAllWithDateBefore(@Param("Date") Date creationDateTime, Pageable pageable);
+    @Query(value = "select * from public.photos a where a.Date <= ?1", nativeQuery = true)
+    Page<Photos> findAllWithDateBefore(Date dateBefore, Pageable pageable);
 
-    @Query(value = "select a from public.photos a where a.Date >= :Date", nativeQuery = true)
-    Page<Photos> findAllDateAfter(@Param("Date") Date Date, Pageable pageable);
+    @Query(value = "select * from public.photos a where a.Date >= ?1", nativeQuery = true)
+    Page<Photos> findAllDateAfter(Date dateAfter, Pageable pageable);
+
+    @Query(value = "SELECT * FROM public.photos where public.photos.coordinates like '%' || :coordinates ||'%'", nativeQuery = true)
+    Page<Photos> findByCoorinat(@Param("coordinates")String coordinates, Pageable pageable);
 
 
 }
