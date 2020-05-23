@@ -38,6 +38,8 @@ public class HelloController {
         ModelAndView mv = new ModelAndView("hello");
 
         mv.addObject("Version", thisVersion);
+        mv.addObject("AllPhoto", searchPhoto.photoAll());
+        mv.addObject("AllViolation",searchPhoto.violationAll());
         return mv;
     }
     @RequestMapping(value = "/view.html",  produces={"text/html; charset=UTF-8"})

@@ -149,6 +149,28 @@ public class SearchPhoto {
         return pagePhotoResultList;
     }
 
+    public int photoAll(){
+        long l = photosRepository.count();
+        return (int) l;
+    }
+    public int violationAll(){
+        ExampleMatcher matcherSecond = ExampleMatcher.matching()
+                .withIgnorePaths("id")
+                .withIgnorePaths("id_user")
+                .withIgnorePaths("date")
+                .withIgnorePaths("id_photo")
+                .withIgnorePaths("content");
+
+        Documents documentSearchExample = new Documents();
+        documentSearchExample.setViolation(true);
+        Example<Documents> exampleSecond = Example.of(documentSearchExample, matcherSecond);
+
+        long l = documentsRepository.count(exampleSecond);
+        return (int) l;
+    }
+
+
+
     private Date parseDate(String date){
         try {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -163,4 +185,5 @@ public class SearchPhoto {
         }
 
     }
+
  }
